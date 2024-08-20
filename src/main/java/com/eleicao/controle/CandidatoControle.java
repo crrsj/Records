@@ -2,6 +2,8 @@ package com.eleicao.controle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +27,16 @@ public class CandidatoControle {
 		var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
 				.buildAndExpand(cadastrar.id()).toUri();
 		return ResponseEntity.created(uri).body(cadastrar);
+	}
+	
+	@GetMapping
+	public ResponseEntity<Iterable<Candidato>>listarTodos(){
+		var listar = servico.listarTodos();
+		return ResponseEntity.ok().body(listar);
+	}
+	@GetMapping("{id}")
+	public ResponseEntity<Candidato>buscarPorId(@PathVariable Long id){
+		var buscar = servico.buscarPorId(id);
+		return ResponseEntity.ok().body(buscar);
 	}
 }
