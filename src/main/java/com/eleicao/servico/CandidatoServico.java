@@ -1,5 +1,7 @@
 package com.eleicao.servico;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.eleicao.entidade.Candidato;
@@ -18,6 +20,9 @@ public class CandidatoServico {
   public Iterable<Candidato>listarTodos(){
 	  return repositorio.findAll();
   }
-  
+  public Candidato buscarPorId(Long id) {
+	  Optional<Candidato>buscar = repositorio.findById(id);
+	  return buscar.get();
+  }
   
 }
