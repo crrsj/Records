@@ -24,5 +24,12 @@ public class CandidatoServico {
 	  Optional<Candidato>buscar = repositorio.findById(id);
 	  return buscar.get();
   }
+  public Candidato atualizar(CandidatoDto candidato) {
+	  var atualizar = new Candidato(candidato);
+	  return repositorio.save(atualizar);
+  }
   
+  public void excluir(Long id) {
+	  repositorio.deleteById(id);
+  }
 }
