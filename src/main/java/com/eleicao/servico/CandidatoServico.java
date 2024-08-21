@@ -5,15 +5,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eleicao.dto.CandidatoDto;
 import com.eleicao.entidade.Candidato;
 import com.eleicao.repositorio.candidatoRepositorio;
-import com.eleicao.servico.dto.CandidatoDto;
 
 
 @Service
 public class CandidatoServico {
   @Autowired
-  private candidatoRepositorio repositorio;
+  private candidatoRepositorio repositorio; 
   
   public Candidato cadastrarCandidato(CandidatoDto candidato) {
 	  var cadastrar = new Candidato(candidato);

@@ -6,5 +6,5 @@ PT,
 PL,
 PSDB,
 REPUBLICANOS,
-NOVO;
+NOVO; 
 }

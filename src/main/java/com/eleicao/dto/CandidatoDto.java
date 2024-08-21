@@ -1,8 +1,8 @@
-package com.eleicao.servico.dto;
+package com.eleicao.dto;
 
 import com.eleicao.enums.Partido;
 
-public record CandidatoDto(      	
+public record CandidatoDto(       	
 		
 		Long id,
 		String nome,

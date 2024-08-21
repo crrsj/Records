@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.eleicao.dto.CandidatoDto;
 import com.eleicao.entidade.Candidato;
 import com.eleicao.servico.CandidatoServico;
-import com.eleicao.servico.dto.CandidatoDto;
 
 @RestController
 @RequestMapping("candidato")
