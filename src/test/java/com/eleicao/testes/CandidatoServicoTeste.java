@@ -3,9 +3,11 @@ package com.eleicao.testes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -63,14 +65,70 @@ public class CandidatoServicoTeste {
 		
 		@Test
 		@DisplayName("Falha ao cadastrar usuario")
-		void falhaAocadastrarCandidato() {
+		void falhaAoCadastrarCandidato() {
 			doThrow(new RuntimeException()).when(candidatoRepositorio).save(candidato);
 			assertThrows(RuntimeException.class, ()-> candidatoServico.cadastrarCandidato(candidatoDto));
 		}
 		
 	}
-	
-	
+	   @Nested	   
+	   class TesteNoMetodoBuscarPorId{
+		   
+		   @Test
+		   @DisplayName("Quando buscar por id retorne sucesso")
+		   void quandoBuscarPorIdRetorneSucesso(){
+			   when(candidatoRepositorio.findById(anyLong())).thenReturn(optionalCandidato);
+			   var resposta = candidatoServico.buscarPorId(1L);
+			   assertNotNull(resposta);
+			   assertEquals(Candidato.class, resposta.getClass());
+				assertEquals(1L, resposta.getId());
+				assertEquals("Carlos", resposta.getNome());
+				assertEquals(Partido.PL, resposta.getPartido());
+				assertEquals(123, resposta.getNumero());
+				assertEquals(1, resposta.getZona());
+				assertEquals(15, resposta.getSessao());
+			   
+		   }
+		   
+		   @Test
+		   @DisplayName("Falha ao buscar por id")
+		   void falhaAoBuscarPorId() {
+			   when(candidatoRepositorio.findById(anyLong())).thenThrow(new NoSuchElementException("ID não encontrado."));
+			   try {
+				   candidatoServico.buscarPorId(1L);
+			   }catch(Exception ex) {
+				 assertEquals(NoSuchElementException.class, ex.getClass());  
+				 assertEquals("ID não encontrado.", ex.getMessage());
+			   }
+		   }
+	   }
+	   
+	   @Nested
+	   class TesteNoMetodoAtualizarCandidato{
+		   
+		   @Test
+		   @DisplayName("Quando atualizar retorne sucesso")
+		   void quandoAtualizarRetorneSucesso() {
+				when(candidatoRepositorio.save(candidato)).thenReturn(candidato);
+				var resposta = candidatoServico.atualizar(candidatoDto);
+				assertNotNull(resposta);
+				assertEquals(Candidato.class, resposta.getClass());
+				assertEquals(1L, resposta.getId());
+				assertEquals("Carlos", resposta.getNome());
+				assertEquals(Partido.PL, resposta.getPartido());
+				assertEquals(123, resposta.getNumero());
+				assertEquals(1, resposta.getZona());
+				assertEquals(15, resposta.getSessao());
+		   }
+		   
+		   
+			@Test
+			@DisplayName("Falha ao cadastrar usuario")
+			void falhaAoAtualizarCandidato() {
+				doThrow(new RuntimeException()).when(candidatoRepositorio).save(candidato);
+				assertThrows(RuntimeException.class, ()-> candidatoServico.cadastrarCandidato(candidatoDto));
+			}
+	   }
 	
 	void start() {
 		 candidato = new Candidato(1L,"Carlos",Partido.PL,123,1,15);
