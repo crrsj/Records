@@ -17,7 +17,7 @@ import com.eleicao.servico.CandidatoServico;
 import com.eleicao.servico.dto.CandidatoDto;
 
 @RestController
-@RequestMapping
+@RequestMapping("candidato")
 public class CandidatoControle {
 
 	@Autowired
@@ -27,7 +27,7 @@ public class CandidatoControle {
 	public ResponseEntity<Candidato>cadastrarCandidato(@RequestBody CandidatoDto candidato){
 		var cadastrar = servico.cadastrarCandidato(candidato);
 		var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
-				.buildAndExpand(cadastrar.id()).toUri();
+				.buildAndExpand(cadastrar.getId()).toUri();
 		return ResponseEntity.created(uri).body(cadastrar);
 	}
 	

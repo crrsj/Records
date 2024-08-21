@@ -8,19 +8,29 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 
 @Entity
 @Table(name = "candidatos")
-public record Candidato(
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		Long id,
-		String nome,
-		Partido partido,
-		Integer numero,
-		Integer zona,
-		Integer sessao) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Candidato{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private	Long id;
+	private	String nome;
+	private	Partido partido;
+	private	Integer numero;
+	private	Integer zona;
+	private	Integer sessao ;
+	
+	
+	
 
 	public Candidato(CandidatoDto candidato) {
 		this(
