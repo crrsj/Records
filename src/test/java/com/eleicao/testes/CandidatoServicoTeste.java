@@ -10,6 +10,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -144,6 +145,25 @@ public class CandidatoServicoTeste {
 		 verify(candidatoRepositorio,times(1)).deleteById(1L);
 	   }
 	   }
+	   
+	   @Nested
+	   class TesteDoMetodoListarTodos{
+		   
+		   @Test
+		   @DisplayName("Quando listar todos retorne sucesso")
+		   void quandoListarTodosRetorneSucesso() {
+			   when(candidatoRepositorio.findAll()).thenReturn(List.of(candidato));
+			   List<Candidato>resposta = candidatoServico.listarTodos();
+			   assertNotNull(resposta);
+			   assertEquals(Candidato.class, resposta.get(0).getClass());
+			   assertEquals(1L, resposta.get(0).getId() );			   
+			   assertEquals("Carlos", resposta.get(0).getNome());	
+			   assertEquals(Partido.PL, resposta.get(0).getPartido());
+			   assertEquals(1, resposta.get(0).getZona());
+			   assertEquals(15, resposta.get(0).getSessao());
+		   }
+	   }
+	   
 	void start() {
 		 candidato = new Candidato(1L,"Carlos",Partido.PL,123,1,15);
 		 candidatoDto = new CandidatoDto(1L,"Carlos",Partido.PL,123,1,15);

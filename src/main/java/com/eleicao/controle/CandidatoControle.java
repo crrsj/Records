@@ -1,5 +1,7 @@
 package com.eleicao.controle;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,7 +34,7 @@ public class CandidatoControle {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Iterable<Candidato>>listarTodos(){
+	public ResponseEntity<List<Candidato>>listarTodos(){
 		var listar = servico.listarTodos();
 		return ResponseEntity.ok().body(listar);
 	}

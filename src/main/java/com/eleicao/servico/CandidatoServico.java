@@ -1,5 +1,6 @@
 package com.eleicao.servico;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CandidatoServico {
 	  return repositorio.save(cadastrar);
   }
    
-  public Iterable<Candidato>listarTodos(){
+  public List<Candidato>listarTodos(){
 	  return repositorio.findAll();
   }
   public Candidato buscarPorId(Long id) {
