@@ -19,7 +19,7 @@ public class CandidatoServico {
 	  var cadastrar = new Candidato(candidato);
 	  return repositorio.save(cadastrar);
   }
-  
+   
   public Iterable<Candidato>listarTodos(){
 	  return repositorio.findAll();
   }

@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.NoSuchElementException;
@@ -45,7 +48,7 @@ public class CandidatoServicoTeste {
 	}
 	
 	@Nested
-	class TestesNoMetodoCadastrarCandidato{
+	class TestesNoMetodoCadastrarCandidato{ 
 		
 		@Test
 		@DisplayName("Quando cadastrar um candidato retorne sucesso.")
@@ -129,7 +132,18 @@ public class CandidatoServicoTeste {
 				assertThrows(RuntimeException.class, ()-> candidatoServico.cadastrarCandidato(candidatoDto));
 			}
 	   }
-	
+	   
+	   @Nested
+	   class TestandoOmetodoExcluir{
+	   
+	   @Test
+	   @DisplayName("Sucesso ao excluir")
+	   void sucessoAoExcluir() {
+		 doNothing().when(candidatoRepositorio).deleteById(anyLong());
+		 candidatoServico.excluir(1L);
+		 verify(candidatoRepositorio,times(1)).deleteById(1L);
+	   }
+	   }
 	void start() {
 		 candidato = new Candidato(1L,"Carlos",Partido.PL,123,1,15);
 		 candidatoDto = new CandidatoDto(1L,"Carlos",Partido.PL,123,1,15);

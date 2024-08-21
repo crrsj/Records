@@ -36,7 +36,7 @@ public class Candidato{
 	public Candidato(CandidatoDto candidato) {
 		this(
 				candidato.id(),
-				candidato.nome(),
+				candidato.nome(), 
 				candidato.partido(),
 				candidato.numero(),
 				candidato.zona(),
