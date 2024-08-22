@@ -154,6 +154,7 @@ public class CandidatoServicoTeste {
 		   void quandoListarTodosRetorneSucesso() {
 			   when(candidatoRepositorio.findAll()).thenReturn(List.of(candidato));
 			   List<Candidato>resposta = candidatoServico.listarTodos();
+			   assertEquals(1, resposta.size());
 			   assertNotNull(resposta);
 			   assertEquals(Candidato.class, resposta.get(0).getClass());
 			   assertEquals(1L, resposta.get(0).getId() );			   
@@ -164,7 +165,7 @@ public class CandidatoServicoTeste {
 		   }
 	   }
 	   
-	void start() {
+	     private void start() {
 		 candidato = new Candidato(1L,"Carlos",Partido.PL,123,1,15);
 		 candidatoDto = new CandidatoDto(1L,"Carlos",Partido.PL,123,1,15);
 		 optionalCandidato = Optional.of(new Candidato(1L,"Carlos",Partido.PL,123,1,15));
