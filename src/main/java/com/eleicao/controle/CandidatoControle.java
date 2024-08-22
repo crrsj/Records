@@ -18,6 +18,8 @@ import com.eleicao.dto.CandidatoDto;
 import com.eleicao.entidade.Candidato;
 import com.eleicao.servico.CandidatoServico;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("candidato")
 public class CandidatoControle {
@@ -26,7 +28,7 @@ public class CandidatoControle {
 	private CandidatoServico servico;
 	
 	@PostMapping
-	public ResponseEntity<Candidato>cadastrarCandidato(@RequestBody CandidatoDto candidato){
+	public ResponseEntity<Candidato>cadastrarCandidato(@RequestBody @Valid CandidatoDto candidato){
 		var cadastrar = servico.cadastrarCandidato(candidato);
 		var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
 				.buildAndExpand(cadastrar.getId()).toUri();
@@ -45,7 +47,7 @@ public class CandidatoControle {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Candidato>atualizarCandidato(@RequestBody CandidatoDto candidato){
+	public ResponseEntity<Candidato>atualizarCandidato(@RequestBody @Valid CandidatoDto candidato){
 		var atualizar = servico.atualizar(candidato);
 		return ResponseEntity.ok().body(atualizar);
 	}
