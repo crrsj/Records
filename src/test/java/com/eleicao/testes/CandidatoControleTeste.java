@@ -3,6 +3,9 @@ package com.eleicao.testes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -136,7 +139,19 @@ public class CandidatoControleTeste {
 			assertEquals(15, resposta.getBody().get(0).getSessao());
 			
 		}
-	}
+	  }
+	    @Nested
+	     class TesteExcluir{
+	    	@Test
+	    	@DisplayName("Quando excluir retorne sucesso")
+	    	 void quandoExcluirRetorneSucesso() {
+	    		 doNothing().when(candidatoServico).excluir(anyLong());
+	    		 ResponseEntity<Void> resposta = candidatoControle.excluir(1L);
+	    		 assertNotNull(resposta);
+	    		 verify(candidatoServico,times(1)).excluir(anyLong());
+	    		 assertEquals(HttpStatus.NO_CONTENT, resposta.getStatusCode());
+	    	 }
+	     }
 	
 	     private void start() {
 		 candidato = new Candidato(1L,"Carlos",Partido.PL,123,1,15);
