@@ -83,8 +83,7 @@ public class CandidatoControleTeste {
 			when(candidatoServico.buscarPorId(anyLong())).thenReturn(candidato);
 			ResponseEntity<Candidato>resposta = candidatoControle.buscarPorId(1L);
 			assertNotNull(resposta);
-			assertEquals(ResponseEntity.class, resposta.getClass());
-			assertEquals(ResponseEntity.class, resposta.getClass());
+			assertEquals(ResponseEntity.class, resposta.getClass());			
 			assertEquals(HttpStatus.OK, resposta.getStatusCode());
 			assertEquals(1L, resposta.getBody().getId());
 			assertEquals("Carlos", resposta.getBody().getNome());

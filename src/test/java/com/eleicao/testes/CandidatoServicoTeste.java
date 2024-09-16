@@ -130,7 +130,7 @@ public class CandidatoServicoTeste {
 			@DisplayName("Falha ao cadastrar usuario")
 			void falhaAoAtualizarCandidato() {
 				doThrow(new RuntimeException()).when(candidatoRepositorio).save(candidato);
-				assertThrows(RuntimeException.class, ()-> candidatoServico.cadastrarCandidato(candidatoDto));
+				assertThrows(RuntimeException.class, ()-> candidatoServico.atualizar(candidatoDto));
 			}
 	   }
 	   
